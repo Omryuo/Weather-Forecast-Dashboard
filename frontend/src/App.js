@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Wind, Droplets, Gauge } from 'lucide-react'; // Icons for weather metrics
+import { Wind, Droplets, Gauge } from 'lucide-react';
 
-// The main App component with an enhanced and modern user interface.
 const App = () => {
   const [city, setCity] = useState('Bengaluru');
   const [inputCity, setInputCity] = useState('Bengaluru');
@@ -55,7 +54,6 @@ const App = () => {
     }
   };
 
-  // Function to get a weather icon based on the description
   const getWeatherIcon = (description) => {
     if (!description) return '🌡️';
     const desc = description.toLowerCase();
@@ -95,29 +93,27 @@ const App = () => {
         </div>
 
         {/* Location Search Input */}
-        <div className="flex justify-center mb-8">
-          <div className="relative">
-            <input
-              type="text"
-              value={inputCity}
-              onChange={(e) => setInputCity(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Enter a city..."
-              className={`p-4 w-64 md:w-80 rounded-l-xl border-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
-                isDarkMode 
-                  ? 'border-gray-600 bg-gray-700/60 text-gray-100 placeholder-gray-400' 
-                  : 'border-gray-300 bg-white/60 text-gray-900 placeholder-gray-500'
-              }`}
-            />
-            <button
-              onClick={handleSearch}
-              className="px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-r-xl transition-all duration-300 shadow-lg transform hover:scale-105"
-            >
-              Search
-            </button>
-          </div>
+        <div className="flex flex-col sm:flex-row justify-center mb-8 space-y-2 sm:space-y-0 sm:space-x-2">
+          <input
+            type="text"
+            value={inputCity}
+            onChange={(e) => setInputCity(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Enter a city..."
+            className={`p-4 w-full sm:w-64 rounded-xl sm:rounded-r-none border-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
+              isDarkMode 
+                ? 'border-gray-600 bg-gray-700/60 text-gray-100 placeholder-gray-400' 
+                : 'border-gray-300 bg-white/60 text-gray-900 placeholder-gray-500'
+            }`}
+          />
+          <button
+            onClick={handleSearch}
+            className="px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl sm:rounded-l-none transition-all duration-300 shadow-lg transform hover:scale-105 sm:hover:scale-100"
+          >
+            Search
+          </button>
         </div>
-
+        
         {/* Loading and Error States */}
         {loading && (
           <div className="flex items-center justify-center py-12">
@@ -127,7 +123,6 @@ const App = () => {
             </div>
           </div>
         )}
-        
         {error && (
           <div className={`p-6 rounded-xl shadow-lg text-center mb-8 ${
             isDarkMode ? 'bg-red-900/60 text-red-200' : 'bg-red-100 text-red-700'
@@ -143,7 +138,6 @@ const App = () => {
           }`}>
             <h2 className="text-3xl font-semibold mb-2">{weather.location}</h2>
             <p className="text-xl font-medium capitalize mb-6 text-blue-600 dark:text-blue-400">{weather.description}</p>
-            
             <div className="flex items-center justify-center mb-8">
               <span className="text-8xl mr-6 animate-bounce">{getWeatherIcon(weather.description)}</span>
               <span className="text-8xl font-light bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
