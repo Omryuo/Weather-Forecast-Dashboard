@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: weather-backend
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}  
+    command: sh -c "python -m venv venv && . venv/bin/activate && pip install -r requirements.txt && python app.py"
+    networks:
+      - weather-net
+  
+  frontend:
+    build:
+      context: ./frontend
+    container_name: weather-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && npm start"
+    depends_on:
+      - backend
+    networks:
+      - weather-net
+
+networks:
+  weather-net:
+    driver: bridge
