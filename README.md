@@ -6,6 +6,11 @@ A **Full-stack**, responsive web application that provides **real-time weather d
 
 ---
 
+## 🚀 Live Demo
+👉 [Weather Forecast Dashboard](https://weather-forecast-dashboard-1.onrender.com/)  
+
+---
+
 ## 📖 Project Overview
 This dashboard combines a modern **React frontend** with a **Python Flask backend**.  
 The backend acts as an **API proxy**, fetching live weather data and generating forecasts using an **AI model**.  
